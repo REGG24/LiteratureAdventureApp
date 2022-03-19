@@ -1,11 +1,6 @@
-import React from 'react';
 import { Redirect, Switch, Route } from 'react-router-dom';
-
-import './App.css';
-
 import Layout from './components/layout/Layout';
 import Home from './components/pages/Home';
-
 
 function App() {
   return (
