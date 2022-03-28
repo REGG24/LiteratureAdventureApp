@@ -69,7 +69,7 @@ const MainNavigation = () => {
               {pages.map((page) => (
                 <MenuItem key={page} onClick={handleCloseNavMenu}>
                   <Typography textAlign="center">
-                    <Link style={{textDecoration:"none", color:"white"}} to={`/${page}`}>{page}</Link>
+                    <Link style={{textDecoration:"none", color:"black", width: "100%", height: "100%"}} to={`/${page}`}>{page}</Link>
                   </Typography>
                 </MenuItem>
               ))}
@@ -88,9 +88,9 @@ const MainNavigation = () => {
               <Button
                 key={page}
                 onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: "white", display: "block" }}
+                sx={{ my: 2, color: "white", display: "block", padding: 0 }}
               >
-                <Link style={{textDecoration:"none", color:"white"}} to={`/${page}`}>{page}</Link>
+                <Link style={{display: "inline-block",textDecoration:"none", color:"white", width: "100%", height: "100%", padding: 10, margin: 0 }} to={`/${page}`}>{page}</Link>
               </Button>
             ))}
           </Box>
