@@ -1,8 +1,8 @@
 import { Redirect, Switch, Route } from 'react-router-dom';
 import Layout from './components/layout/Layout';
-import { AddClients } from './components/pages/Clients/AddClients';
 import Home from './components/pages/Home';
 import { AllEmployees } from './components/pages/Employees/AllEmployees';
+import { AllClients } from './components/pages/Clients/AllClients';
 
 function App() {
   return (
@@ -17,8 +17,8 @@ function App() {
           <Route exact path='/Employees'>
             <AllEmployees />
           </Route>
-          <Route exact path='/clients'>
-            <AddClients />
+          <Route exact path='/Clients'>
+            <AllClients/>
           </Route>
       </Switch>
     </Layout>
