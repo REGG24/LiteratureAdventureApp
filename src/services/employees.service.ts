@@ -5,10 +5,10 @@ export async function getAllEmployees(): Promise<Employee[]> {
     let response;
     let data: Employee[] = [];
     try {
-        response = await fetch(`${API_URL}employees`);
+        response = await fetch(`${API_URL}/employees`);
         data = await response.json();
     } catch (error) {
-        throw new Error(JSON.stringify(error));
+        console.log(error);
     }
    
     if (!response) {
