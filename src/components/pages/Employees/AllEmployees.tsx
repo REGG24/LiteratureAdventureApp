@@ -16,7 +16,6 @@ export const AllEmployees = () => {
   useEffect(() => {
     async function fetchEmployees(){
       setEmployees(await getAllEmployees());
-      console.log(employees);
     }
     fetchEmployees();
   }, []);

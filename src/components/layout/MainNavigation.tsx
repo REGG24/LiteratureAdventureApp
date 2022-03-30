@@ -11,7 +11,7 @@ import Button from "@mui/material/Button";
 import MenuItem from "@mui/material/MenuItem";
 import { Link } from "react-router-dom";
 
-const pages = ["Employees", "Clients", "Etc", "Home"];
+const pages = ["Employees", "Clients", "Books", "Home"];
 
 const MainNavigation = () => {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
@@ -34,7 +34,7 @@ const MainNavigation = () => {
             component="div"
             sx={{ mr: 2, display: { xs: "none", md: "flex" } }}
           >
-            Literature Adventure
+            <Link style={{textDecoration:"none", color:"white"}} to={`/home`}>Literature Adventure</Link>
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
@@ -68,8 +68,10 @@ const MainNavigation = () => {
             >
               {pages.map((page) => (
                 <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">
-                    <Link style={{textDecoration:"none", color:"black", width: "100%", height: "100%"}} to={`/${page}`}>{page}</Link>
+                 <Typography textAlign="center">
+
+                    <Link style={{textDecoration:"none", color:"black"}} to={`/${page}`}>{page}</Link>
+
                   </Typography>
                 </MenuItem>
               ))}
@@ -81,7 +83,7 @@ const MainNavigation = () => {
             component="div"
             sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}
           >
-            LOGO
+            <Link style={{textDecoration:"none", color:"white"}} to={`/home`}>Literature Adventure</Link>
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             {pages.map((page) => (
