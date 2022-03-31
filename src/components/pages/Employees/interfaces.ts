@@ -5,3 +5,10 @@ export interface Employee {
     ADDRESS: string,
     SALARY: string
 }
+
+export interface EmployeeFormInput {
+    name: string;
+    phone: string;
+    address: string;
+    salary: number;
+}
