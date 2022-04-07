@@ -10,7 +10,6 @@ import { getAllEmployees } from '../../../services/employees.service';
 import { useEffect, useState, Fragment } from 'react';
 import { Employee } from './interfaces';
 import { Box, Button, Modal } from '@mui/material';
-import { AddClients } from '../Clients/AddClients';
 import { NewEmployee } from './NewEmployee';
 
 const style = {

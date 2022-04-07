@@ -5,6 +5,10 @@ import Box from "@mui/material/Box";
 import { makeStyles } from "@mui/styles";
 import { ClientsService } from "../../../services/clients.service";
 import { ClientFormInput } from "./interfaces";
+
+interface propsChild{
+ handleClose:  ()=> void;
+}
 const useStyles = makeStyles({
   root: {
     border: 0,
@@ -15,7 +19,7 @@ const useStyles = makeStyles({
 });
 
 
-export const AddClients = () => {
+export const AddClients = ({handleClose}: propsChild)  => {
   const { control, handleSubmit } = useForm<ClientFormInput>();
   const onSubmit: SubmitHandler<ClientFormInput> = (data) => {
     ClientsService.addClient(data.name, data.phone, data.address);
@@ -70,6 +74,9 @@ export const AddClients = () => {
         </div>
         <Button className={classes.root} type="submit">
           Registrar
+        </Button>
+                <Button className={classes.root}  onClick={handleClose}>
+          Cerrar
         </Button>
       </form>
     </Box>

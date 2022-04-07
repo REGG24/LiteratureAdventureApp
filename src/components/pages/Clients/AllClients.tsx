@@ -78,7 +78,7 @@ export function AllClients() {
           aria-describedby="modal-modal-description"
         >
           <Box sx={{ style }}>
-            <AddClients />
+            <AddClients handleClose={handleClose} />
           </Box>
         </Modal>
       </TableContainer>
