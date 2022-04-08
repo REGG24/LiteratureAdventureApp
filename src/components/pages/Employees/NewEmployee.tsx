@@ -5,6 +5,12 @@ import { makeStyles } from "@mui/styles";
 import Button from "@mui/material/Button";
 import { EmployeeFormInput, Employee } from './interfaces';
 import { addEmployee } from "../../../services/employees.service";
+import TextField from '@mui/material/TextField';
+import { Container } from "@mui/material";
+
+interface propsChild {
+  handleModal: () => void;
+}
 
 const useStyles = makeStyles({
   root: {
@@ -15,7 +21,7 @@ const useStyles = makeStyles({
   },
 });
 
-export const NewEmployee = () => {
+export const NewEmployee = (props: propsChild) => {
   const classes = useStyles();
   const [added, setAdded] = useState(false);
   const [errorAdding, setErrorAdding] = useState(false);
@@ -36,7 +42,7 @@ export const NewEmployee = () => {
   });
   
   const onSubmit = (employee: EmployeeFormInput) => {
-    //console.log(employee);
+    console.log(employee);
     async function sendEmployee(){
       const response = await addEmployee(employee);
       //console.log(response.rowAffected);
@@ -47,7 +53,7 @@ export const NewEmployee = () => {
         setErrorAdding(true);
       }
     }
-    sendEmployee()
+    sendEmployee();
   };
   
   return (
@@ -65,21 +71,25 @@ export const NewEmployee = () => {
         p: 4,
       }}
     >
-    <div>
+      <Container>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div>
-          <input {...register("name")} placeholder="Name" required/>
-          <input {...register("phone")} placeholder="Phone"  required/>
-          <input {...register("address")} placeholder="Address" required/>
-          <input {...register("salary")} placeholder="Salary" required/>
-        </div>
-        <Button className={classes.root} type="submit">
-          Registrar
-        </Button>
-        {added && <p>Employee added successfully</p>}
-        {errorAdding && <p>There was an error</p>}
+          <div>
+            <TextField variant="standard" fullWidth={true} {...register("name")} placeholder="Name" required/>
+            <TextField variant="standard" {...register("phone")} placeholder="Phone"  required/>
+            <TextField variant="standard" {...register("address")} placeholder="Address" required/>
+            <TextField variant="standard" {...register("salary")} placeholder="Salary" required/>
+          </div>
+          <Button className={classes.root} type="submit">
+            Registrar
+          </Button>
+          <Button className={classes.root}  onClick={props.handleModal}>
+            Cerrar
+          </Button>
+          {added && <p>Employee added successfully</p>}
+          {errorAdding && <p>There was an error</p>}
+        
       </form>
-    </div>
+      </Container>  
     </Box>
   );
 };

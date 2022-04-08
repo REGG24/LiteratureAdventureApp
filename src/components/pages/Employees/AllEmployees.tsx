@@ -83,7 +83,7 @@ export const AllEmployees = () => {
             aria-describedby="modal-modal-description"
           >
             <Box sx={{ style }}>
-              <NewEmployee />
+              <NewEmployee handleModal={handleModal} />
             </Box>
           </Modal>
         </TableContainer>
