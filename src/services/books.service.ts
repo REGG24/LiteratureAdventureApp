@@ -11,4 +11,8 @@ export class BooksService {
         const response = await axios.get(`${API_URL}books`)
         return response.data;
     };
+    public static async addAuthor(name: string, nationality: string){
+        return axios.post(`${API_URL}authors`, 
+        { name, nationality})
+    };
 }

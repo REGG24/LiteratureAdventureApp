@@ -2,12 +2,12 @@ import Box from "@mui/material/Box";
 import { useState } from "react";
 import { makeStyles } from "@mui/styles";
 import Button from "@mui/material/Button";
-import { BookFormInput } from "./interfaces";
+import { AuthorFormInput } from "./interfaces";
 import TextField from "@mui/material/TextField";
 import { useForm, Controller, SubmitHandler } from "react-hook-form";
 import { BooksService } from "../../../services/books.service";
 
-interface propsAddBook {
+interface propsAddAuthor {
   handleClose: () => void;
 }
 
@@ -20,16 +20,13 @@ const useStyles = makeStyles({
   },
 });
 
-export const AddBook = ({ handleClose }: propsAddBook) => {
+export const AddAuthor = ({ handleClose }: propsAddAuthor) => {
     const [errors, setErrors] = useState<null | string>(null);
-  const { control, handleSubmit } = useForm<BookFormInput>();
-  const onSubmit: SubmitHandler<BookFormInput> = (data) => {
-    BooksService.addBook(
+  const { control, handleSubmit } = useForm<AuthorFormInput>();
+  const onSubmit: SubmitHandler<AuthorFormInput> = (data) => {
+    BooksService.addAuthor(
       data.name,
-      data.description,
-      data.price,
-      data.stock,
-      data.id_author
+      data.nationality
     ).then((response)=>{
         setErrors(null)
         console.log(response)
@@ -37,7 +34,7 @@ export const AddBook = ({ handleClose }: propsAddBook) => {
     .catch(error =>{
         if(error.response){
             console.log(error.response)
-            setErrors('Referencias no encontradas, revisa los datos');
+            setErrors('Algo salio mal');
         }
     })
   };
@@ -66,7 +63,7 @@ export const AddBook = ({ handleClose }: propsAddBook) => {
             rules={{ required: true, maxLength: 50 }}
             render={({ field }) => (
               <TextField
-                label="Titulo"
+                label="Nombre"
                 variant="standard"
                 autoComplete="off"
                 {...field}
@@ -74,58 +71,13 @@ export const AddBook = ({ handleClose }: propsAddBook) => {
             )}
           />
           <Controller
-            name="description"
+            name="nationality"
             control={control}
             defaultValue=""
             rules={{ required: true, maxLength: 50 }}
             render={({ field }) => (
               <TextField
-                label="Descripcion"
-                variant="standard"
-                autoComplete="off"
-                {...field}
-              />
-            )}
-          />
-          <Controller
-            name="price"
-            defaultValue={0}
-            control={control}
-            rules={{ required: true, maxLength: 20}}
-            render={({ field }) => (
-              <TextField
-              type="number"
-                label="Precio"
-                variant="standard"
-                autoComplete="off"
-                {...field}
-              />
-            )}
-          />
-          <Controller
-          defaultValue={0}
-            name="stock"
-            control={control}
-            rules={{ required: true, maxLength: 20 }}
-            render={({ field }) => (
-              <TextField
-                type='number'
-                label="Stock"
-                variant="standard"
-                autoComplete="off"
-                {...field}
-              />
-            )}
-          />
-          <Controller
-          defaultValue={0}
-            name="id_author"
-            control={control}
-            rules={{ required: true, maxLength: 20 }}
-            render={({ field }) => (
-              <TextField
-              type='number'
-                label="ID autor"
+                label="Nacionalidad"
                 variant="standard"
                 autoComplete="off"
                 {...field}
