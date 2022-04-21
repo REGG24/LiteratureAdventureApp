@@ -46,26 +46,22 @@ export const AllBooks = () => {
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
           <TableHead>
             <TableRow>
-              <TableCell>Id Book</TableCell>
-              <TableCell align="right">Title</TableCell>
-              <TableCell align="right">Price</TableCell>
-              <TableCell align="right">Stock</TableCell>
-              <TableCell align="right">Author</TableCell>
+              <TableCell align="center">Title</TableCell>
+              <TableCell align="center">Price</TableCell>
+              <TableCell align="center">Stock</TableCell>
+              <TableCell align="center">Author</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             {books.map((book) => (
               <TableRow
-                key={book.ID_BOOK}
+                key={book.TITLE}
                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
               >
-                <TableCell component="th" scope="row">
-                  {book.ID_BOOK}
-                </TableCell>
-                <TableCell align="right">{book.TITLE}</TableCell>
-                <TableCell align="right">{book.PRICE}</TableCell>
-                <TableCell align="right">{book.STOCK}</TableCell>
-                <TableCell align="right">{book.AUTHOR}</TableCell>
+                <TableCell align="center">{book.TITLE}</TableCell>
+                <TableCell align="center">{book.PRICE}</TableCell>
+                <TableCell align="center">{book.STOCK}</TableCell>
+                <TableCell align="center">{book.AUTHOR}</TableCell>
               </TableRow>
             ))}
           </TableBody>
