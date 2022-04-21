@@ -1,5 +1,4 @@
 export interface Books {
-    ID_BOOK: number;
     TITLE: string;
     PRICE: number;
     STOCK: number;
@@ -11,10 +10,20 @@ export interface Books {
     description: string;
     price: number;
     stock: number;
-    id_author: number;
+    author: string;
 }
 
 export interface AuthorFormInput{
     name:string;
     nationality: string;
+}
+
+export interface Author{
+  ID_AUTHOR: number;
+  NAME: string;
+}
+
+export interface AuthorLabel{
+  label: string;
+  id: number;
 }

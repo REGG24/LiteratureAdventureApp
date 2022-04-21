@@ -6,7 +6,10 @@ import { BookFormInput } from "./interfaces";
 import TextField from "@mui/material/TextField";
 import { useForm, Controller, SubmitHandler } from "react-hook-form";
 import { BooksService } from "../../../services/books.service";
-
+import { useEffect } from "react";
+import { AuthorLabel } from "./interfaces";
+import { InputLabel, MenuItem, Select } from "@mui/material";
+import { display } from "@mui/system";
 interface propsAddBook {
   handleClose: () => void;
 }
@@ -21,26 +24,51 @@ const useStyles = makeStyles({
 });
 
 export const AddBook = ({ handleClose }: propsAddBook) => {
-    const [errors, setErrors] = useState<null | string>(null);
+  const [errors, setErrors] = useState<null | string>(null);
+  const [authors, setAuthors] = useState<AuthorLabel[]>([]);
   const { control, handleSubmit } = useForm<BookFormInput>();
+
   const onSubmit: SubmitHandler<BookFormInput> = (data) => {
     BooksService.addBook(
       data.name,
       data.description,
       data.price,
       data.stock,
-      data.id_author
-    ).then((response)=>{
-        setErrors(null)
-        console.log(response)
-    })
-    .catch(error =>{
-        if(error.response){
-            console.log(error.response)
-            setErrors('Referencias no encontradas, revisa los datos');
+      data.author
+    )
+      .then((response) => {
+        setErrors(null);
+        console.log(response);
+      })
+      .catch((error) => {
+        if (error.response) {
+          console.log(error.response);
+          setErrors("Referencias no encontradas, revisa los datos");
         }
-    })
+      });
   };
+
+  const generateSelectOptions = () => {
+    return authors.map((author) => {
+      return (
+        <MenuItem key={author.id} value={author.label}>
+          {author.label}
+        </MenuItem>
+      );
+    });
+  };
+  useEffect(() => {
+    const getAuthors = async () => {
+      const response = await BooksService.getAuthors();
+      let data: AuthorLabel[] = [];
+      response.map((author) => {
+        data.push({ label: author.NAME, id: author.ID_AUTHOR });
+      });
+      setAuthors(data);
+    };
+    getAuthors();
+  }, []);
+
   const classes = useStyles();
   return (
     <Box
@@ -91,10 +119,10 @@ export const AddBook = ({ handleClose }: propsAddBook) => {
             name="price"
             defaultValue={0}
             control={control}
-            rules={{ required: true, maxLength: 20}}
+            rules={{ required: true, maxLength: 20 }}
             render={({ field }) => (
               <TextField
-              type="number"
+                type="number"
                 label="Precio"
                 variant="standard"
                 autoComplete="off"
@@ -103,13 +131,13 @@ export const AddBook = ({ handleClose }: propsAddBook) => {
             )}
           />
           <Controller
-          defaultValue={0}
+            defaultValue={0}
             name="stock"
             control={control}
             rules={{ required: true, maxLength: 20 }}
             render={({ field }) => (
               <TextField
-                type='number'
+                type="number"
                 label="Stock"
                 variant="standard"
                 autoComplete="off"
@@ -117,23 +145,24 @@ export const AddBook = ({ handleClose }: propsAddBook) => {
               />
             )}
           />
+          
+
           <Controller
-          defaultValue={0}
-            name="id_author"
+            defaultValue=""
             control={control}
-            rules={{ required: true, maxLength: 20 }}
-            render={({ field }) => (
-              <TextField
-              type='number'
-                label="ID autor"
-                variant="standard"
-                autoComplete="off"
-                {...field}
-              />
+            name="author"
+            render={({ field: { onChange, value } }) => (
+              <><InputLabel>Autor</InputLabel>
+              <Select label='Autor'
+              sx={{display:'block', padding:'0px', width:'75%'}}
+              onChange={onChange} value={value}>
+                {generateSelectOptions()}
+              </Select>
+              </>
             )}
           />
         </div>
-        { errors}
+        {errors}
         <Button className={classes.root} type="submit">
           Añadir
         </Button>
