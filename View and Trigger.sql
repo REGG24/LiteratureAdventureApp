@@ -22,7 +22,7 @@ GO
 	DECLARE @TITLE as VARCHAR(50)
 	DECLARE @STOCK as INT
 	DECLARE @PRICE as INT
-	SELECT @AUTHORid = 1, @DES=inserted.[DESCRIPTION], @TITLE = inserted.TITLE,
+	SELECT @AUTHORid = [authors].ID_AUTHOR, @DES=inserted.[DESCRIPTION], @TITLE = inserted.TITLE,
 	@STOCK = inserted.STOCK, @PRICE= inserted.PRICE
 	FROM authors JOIN inserted on inserted.AUTHOR = authors.[NAME]
 	IF (@AUTHORid is null)
